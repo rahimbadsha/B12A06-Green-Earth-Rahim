@@ -5,16 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Green Earth | Assignment 6</title>
 
-    <!-- main css file -->
-     <link rel="stylesheet" type="text/css" href="./style.css" />
-
+ 
     <!-- daisy ui and talwind css  -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
+    <!-- main css file -->
+    <link rel="stylesheet" type="text/css" href="./style.css" />
+
+
     
 </head>
-<body class="font-inter">
+<body class="font-inter bg-[#f0fdf4]">
+
+    <!-- Top header  -->
     <header class="bg-[#15803d]">
         <div class="navbar max-w-[1650px] mx-auto min-h-[90px]">
             <div class="navbar-start">
@@ -45,6 +49,7 @@
         </div>
     </header>
 
+     <!-- Hero section  -->
     <section class="hero bg-no-repeat bg-[#cff0dc]"  style="background-image: url('./assets/hero-leaf1.png'), url('./assets/hero-leaf2.png'); background-position: left bottom, right bottom; background-size: auto, auto; ">
         <div class="">
             <div class="hero-content text-neutral-content text-center">
@@ -57,24 +62,21 @@
         </div>
     </section>
 
-
-
-
     <!-- About the campaign section  -->
 
-    <section>
-        <h2>About the campaign</h2>
-        <div>
-            <div>
+    <section class="py-20 ">
+        <h2 class="text-4xl font-bold text-[#202a37] text-center">About the campaign</h2>
+        <div class="flex items-center justify-around gap-10 mx-auto max-w-[1100px] mt-10">
+            <div class="flex-1">
                 <img src="./assets/about.png" />
             </div>
-            <div class="flex ">
+            <div class="flex-1 text-base text-[#49535d] ">
                 <p>
                     Green Earth is a global tree plantation initiative dedicated to fighting climate change. Since our start, we’ve planted
                     over 500,000 trees worldwide. By joining our campaign, you help restore forests, create habitats for wildlife, and
                     combat global warming.
                 </p>
-                <ul>
+                <ul class="mt-5 list-disc space-y-2 list-inside" >
                     <li>Restoration of natural habitats</li>
                     <li>Improvement of air quality</li>
                     <li>Support for local communities</li>
@@ -82,5 +84,9 @@
             </div>
         </div>
     </section>
+
+
+    <!-- our impact section  -->
+     
 </body>
 </html>
