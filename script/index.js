@@ -63,7 +63,7 @@ const displayByCatTree = (plants) => {
                 <div class="single-card p-5 shadow-lg rounded-lg bg-white">
                         <div>
                             <img class="w-full h-100" src="${plant.image}" />
-                            <h3 class="font-bold text-base pt-3 pb-3">${plant.name}</h3>
+                            <h3 onclick="loadPlantDetails(${plant.id})" class="font-bold text-base pt-3 pb-3">${plant.name}</h3>
                             <p class="font-normal text-[14px] text-gray-500">${plant.description}</p>
                         </div>
                         
@@ -85,5 +85,37 @@ const displayByCatTree = (plants) => {
 }
 
 
+
+
+
+// *****---- Below are card showing function ****------
+
+// function load plant details
+const loadPlantDetails = async (id) => {
+    const url = `https://openapi.programming-hero.com/api/plant/${id}`
+
+    const res = await fetch(url)
+    const wordDetails = await res.json()
+    displayPlantDetails(wordDetails.plants)
+}
+
+const displayPlantDetails = (plant) => {
+
+    // 1. get the container id
+    const modalContainer = document.getElementById('modal-container')
+    modalContainer.innerHTML = `
+    
+        <div>
+                <h2 class="font-xl font-bold text-[#000] pb-2">${plant.name}</h2>
+                <img class="rounded-xl" src="${plant.image}" />
+                <p class="font-base text-[#000] font-bold mt-3">Category: <span class="font-base font-normal text-gray-400">${plant.category}</span></p>
+                <p class="font-base text-[#000] font-bold mt-3">price: <span class="font-base font-normal text-gray-400">${plant.price}</span></p>
+                <p class="font-base text-[#000] font-bold mt-3">Description: <span class="font-base font-normal text-gray-400">${plant.description}</span>
+                </p>
+        </div>
+    `;
+    document.getElementById('plant_modal').showModal()
+    
+}
 
 loadTreeCategories()
