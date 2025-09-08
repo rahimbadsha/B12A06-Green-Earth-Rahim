@@ -1,5 +1,6 @@
+// *****---- Below are categories name showing function ****------
 
-// load categories from api
+// Function load categories from api
 const loadTreeCategories = () => {
     const url = `https://openapi.programming-hero.com/api/categories`;
     fetch(url)
@@ -10,31 +11,43 @@ const loadTreeCategories = () => {
         })
 }
 
-// load categories tree data on click categories
+// Function Display Categories name on left side
+const displayTreeCategories = (categoryName) => {
+    
+    // 1. get the container of the section/column
+    const categoriesContainer = document.getElementById('tree-categories-container')
+    categoriesContainer.innerHTML = ""
+
+    // loop through all categories
+    categoryName.forEach(catName => {
+        //3. create child for each category
+        const categoryDiv = document.createElement('div')
+        categoryDiv.innerHTML = `
+            <div>
+                <button onclick=loadByCategories(${catName.id}) class="btn bg-transparent border-0 rounded-full text-[#1f2937] font-base text-normal p-0 hover:bg-transparent hover:border-0 hover:shadow-none">${catName.category_name}</button>
+            </div>
+        `;
+
+        // 4. load the new create element div
+    categoriesContainer.append(categoryDiv)
+
+    });
+}
+
+
+
+// *****---- Below are card showing function ****------
+
+// Function load categories plants on click categories
 const loadByCategories = async(id) => {
     let url = `https://openapi.programming-hero.com/api/category/${id}`
 
     const res = await fetch(url)
     const catGroup = await res.json()
     displayByCatTree(catGroup.plants)
-    // fetch(url) 
-    //     .then(res => res.json() )
-    //     .then(catGroup => {
-    //         displayByCatTree(catGroup.plants)
-    //     })
 }
 
-
-
-const loadWordDetail = async(id) => {
-    const url = `https://openapi.programming-hero.com/api/word/${id}`
-
-    const res = await fetch(url)
-    const details = await res.json();
-    displayWordDetails(details.data)
-}
-
-// Display categories items at right side onclick the left side categories 
+// Function Display categories plants at right side onclick the left side categories 
 const displayByCatTree = (plants) => {
     // 1. get the container id
     const displayByCatContainer = document.getElementById('display-catdetails-container')
@@ -49,7 +62,7 @@ const displayByCatTree = (plants) => {
             catDetailsInnerDiv.innerHTML = `
                 <div class="single-card p-5 shadow-lg rounded-lg bg-white">
                         <div>
-                            <img class="w-full h-full object-cover" src="${plant.image}" />
+                            <img class="w-full h-100" src="${plant.image}" />
                             <h3 class="font-bold text-base pt-3 pb-3">${plant.name}</h3>
                             <p class="font-normal text-[14px] text-gray-500">${plant.description}</p>
                         </div>
@@ -71,36 +84,6 @@ const displayByCatTree = (plants) => {
     });
 }
 
-// "categories": [
-// {
-// "id": 1,
-// "category_name": "Fruit Tree",
-// "small_description": "Trees that bear edible fruits like mango, guava, and jackfruit."
-// },
-// }
 
-
-const displayTreeCategories = (categoryName) => {
-    
-    // 1. get the container of the section/column
-    const categoriesContainer = document.getElementById('tree-categories-container')
-    categoriesContainer.innerHTML = ""
-
-    // loop through all categories
-    categoryName.forEach(catName => {
-        //3. create child for each category
-        const categoryDiv = document.createElement('div')
-        categoryDiv.innerHTML = `
-            <div>
-                <button onclick=loadByCategories(${catName.id}) class="btn bg-transparent border-0 rounded-full text-[#1f2937] font-base text-normal p-0 hover:bg-transparent hover:border-0 hover:shadow-none">${catName.category_name}</button>
-            </div>
-        `;
-
-        // 4. load the new create element div
-    categoriesContainer.append(categoryDiv)
-
-    });
-
-}
 
 loadTreeCategories()
