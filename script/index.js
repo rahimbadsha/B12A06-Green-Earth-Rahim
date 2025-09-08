@@ -38,7 +38,7 @@ const displayTreeCategories = (categoryName) => {
 
 // *****---- Below are card showing function ****------
 
-// Function load categories plants on click categories
+// Function load categories plants on click categories on right side
 const loadByCategories = async(id) => {
     let url = `https://openapi.programming-hero.com/api/category/${id}`
 
@@ -55,14 +55,12 @@ const displayByCatTree = (plants) => {
 
     // 2. loop through all plants
     plants.forEach(plant => {
-        console.log("id")
-        console.log(plant.id)
             // 3. create child element inside the container to show the details
             const catDetailsInnerDiv = document.createElement("div")
             catDetailsInnerDiv.innerHTML = `
                 <div class="single-card p-5 shadow-lg rounded-lg bg-white">
                         <div>
-                            <img class="w-full h-100" src="${plant.image}" />
+                            <img class="w-full h-100 object-cover" src="${plant.image}" />
                             <h3 onclick="loadPlantDetails(${plant.id})" class="font-bold text-base pt-3 pb-3">${plant.name}</h3>
                             <p class="font-normal text-[14px] text-gray-500">${plant.description}</p>
                         </div>
@@ -118,4 +116,19 @@ const displayPlantDetails = (plant) => {
     
 }
 
+// *****---- Below are all plant showing function ****------
+const loadAllPlant = () => {
+    const url = `https://openapi.programming-hero.com/api/plants`;
+
+    fetch(url)
+        .then(res => res.json())
+        .then(allPlant => {
+            displayByCatTree(allPlant.plants);
+        })
+};
+
+// calling the loadTreeCategories() to show left side menu
 loadTreeCategories()
+
+// calling the loadAllPlant() to show all plants when page loads
+loadAllPlant()
