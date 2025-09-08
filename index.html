@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Green Earth | Assignment 6</title>
 
+
+    <!-- fontawesome  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
  
     <!-- daisy ui and talwind css  -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
@@ -66,21 +71,41 @@
     <!-- All Tree  by category section-->
     <section class="p-10">
         <h2 class="text-4xl font-bold text-center text-[#202a37]">Choose Your Trees</h2>
-        <div class="max-w-[1650px] mx-auto flex gap-6">
-            <div class="">
+        <div class="max-w-[1650px] mx-auto flex gap-6 mt-5">
+            <div class="w-full md:w-1/7">
                 <h3 class="text-3xl font-bold">Categories</h3>
                 <div  class="text-xl text-[#1f2937]">
-                    <a  onclick="loadAllPlant()" class="btn bg-transparent border-0 rounded-full text-[#1f2937] font-base p-0">All Tree</a>
+                    <!-- <a  onclick="loadAllPlant()" class="btn bg-transparent border-0 rounded-full text-[#1f2937] font-base p-0">All Tree</a> -->
                     <div id="tree-categories-container">
-                        
+                        <!-- code generate from index.js loadTreeCategories() -->
                     </div>
                 </div>
 
             </div>
-            <div id="display-catdetails-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 ">
-                
+            <div id="display-catdetails-container" class="w-full md:w-7/10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 ">
+                <!-- code generate from index.js displayByCatTree() -->
             </div>
-            <div></div>
+            <div class="p-5 shadow-lg rounded-lg bg-white w-full md:w-1/5">
+                <h2 class="font-bold text-[#000] text-2xl">Your Cart</h2>
+                <div id="sidebar-container" class="hidden" >
+                    <div id="sidebar-cart-div">
+                        <div class="flex items-center justify-between gap-4 rounded-xl bg-[#f1fdf4] p-3 mb-3 mt-3">
+                            <div class="pt-4">
+                                <h2 id="added-tree-name" class="text-xl font-bold ">Mango Tree</h2>
+                                <p class="font-normal text-gray-400 text-xl pt-2">$<span id="added-tree-price">500</span> <i class="fa-solid fa-xmark"></i> 1</p>
+                            </div>
+                            <div>
+                                <a id="delete-icon" class="text-gray-400"><i class="fa-solid fa-xmark"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="text-gray-400">
+                    <div id="cart-total" class="flex justify-between items-center pt-1 font-bold text-xl pt-2">
+                        <h2>Total: </h2>
+                        <h2>$<span id="total-price">0</span></h2>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -153,10 +178,10 @@
         <h2 class="text-4xl font-bold text-white text-center">Plant a Tree Today</h2>
         <div class="mx-auto w-[800px] pt-8">
             <fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-xl p-6 bg-[#15803d] mx-auto gap-3">
+        
             
-                <input type="text" class="ianput w-full" placeholder="Your Name" />
-            
-                <input type="text" class="input w-full" placeholder="Your Email Address" />
+                <input type="text" class="input w-full" placeholder="Your Name" />
+                <input type="email" class="input w-full" placeholder="Your Email Address" />
 
                 <select class="select w-full">
                     <option disabled selected>Numbers of Trees</option>

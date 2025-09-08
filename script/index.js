@@ -6,7 +6,6 @@ const loadTreeCategories = () => {
     fetch(url)
         .then((res) => res.json())
         .then(cat => {
-            console.log("kire")
             displayTreeCategories(cat.categories)
         })
 }
@@ -24,7 +23,7 @@ const displayTreeCategories = (categoryName) => {
         const categoryDiv = document.createElement('div')
         categoryDiv.innerHTML = `
             <div>
-                <button onclick=loadByCategories(${catName.id}) class="btn bg-transparent border-0 rounded-full text-[#1f2937] font-base text-normal p-0 hover:bg-transparent hover:border-0 hover:shadow-none">${catName.category_name}</button>
+                <button id="category-btn-${catName.id}" onclick=loadByCategories(${catName.id}) class="category-btns bg-transparent border-0 rounded-full text-[#1f2937] font-base text-normal p-4 text-left hover:bg-transparent hover:border-0 hover:shadow-none">${catName.category_name}</button>
             </div>
         `;
 
@@ -44,7 +43,17 @@ const loadByCategories = async(id) => {
 
     const res = await fetch(url)
     const catGroup = await res.json()
+    removeActive();
+    const btnActive = document.getElementById(`category-btn-${id}`)
+    btnActive.classList.add('active')
     displayByCatTree(catGroup.plants)
+}
+
+const removeActive = () => {
+    const plantButton = document.querySelectorAll('.category-btns')
+    plantButton.forEach(activeBtn => {
+        activeBtn.classList.remove('active')
+    })
 }
 
 // Function Display categories plants at right side onclick the left side categories 
@@ -61,16 +70,16 @@ const displayByCatTree = (plants) => {
                 <div class="single-card p-5 shadow-lg rounded-lg bg-white">
                         <div>
                             <img class="w-full h-100 object-cover" src="${plant.image}" />
-                            <h3 onclick="loadPlantDetails(${plant.id})" class="font-bold text-base pt-3 pb-3">${plant.name}</h3>
+                            <h3 onclick="loadPlantDetails(${plant.id})" class="plant-name font-bold text-base pt-3 pb-3">${plant.name}</h3>
                             <p class="font-normal text-[14px] text-gray-500">${plant.description}</p>
                         </div>
                         
                         <div class="flex justify-between items-center gap-4 pt-3">
                             <h3 class="bg-[#dcfce8] py-1 px-2 rounded-full text-[#17803d]">${plant.category}</h3>
-                            <h2>${plant.price}</h2>
+                            <h2 class="plant-price">${plant.price}</h2>
                         </div>
 
-                        <button class="btn btn-full w-full rounded-full bg-[#17803d] text-white p-3 mt-4">Add to card</button>
+                        <button class="btn-add-cart btn btn-full w-full rounded-full bg-[#17803d] text-white p-3 mt-4">Add to card</button>
 
                 </div>
             
@@ -80,10 +89,49 @@ const displayByCatTree = (plants) => {
         displayByCatContainer.append(catDetailsInnerDiv)
 
     });
+
+    // IF Add to cart button clicks this code will execute
+    // const addCartBtns = document.querySelectorAll('.btn-add-cart');
+    // addCartBtns.forEach(button => {
+    //     button.addEventListener('click', function() {
+    //         const card = button.closest('.single-card');
+    //         const plantName = card.querySelector('.plant-name').innerText;
+    //         const plantPrice = card.querySelector('.plant-price');
+    //         const newPrice = parseInt(plantPrice.innerText)
+
+    //         alert(`Added ${plantName} (${plantPrice.innerText}) to the cart`);
+
+            
+
+    //         const sidebarContentDiv = document.getElementById('sidebar-cart-div');
+    //         const sidebarTreeName = document.getElementById('added-tree-name');
+    //         const sidebarTreePrice = document.getElementById('added-tree-price');
+    //         let totalPrice = document.getElementById('total-price');
+    //         const sidebarDelete = document.getElementById('delete-icon');
+            
+    //         // Clone the sidebar-cart-div
+    //         const sidebarContainer = document.getElementById('sidebar-container');
+    //         let newSidebarContentDiv = sidebarContentDiv.cloneNode(true);
+    //         sidebarContainer.classList.remove('hidden');
+
+    //         // update the clone block with new data
+    //         sidebarTreeName.innerText = plantName;
+    //         sidebarTreePrice.innerText = plantPrice.innerText;
+    //         totalPrice.innerText = newPrice
+
+    //         //total price
+    //         //newPrice = newPrice + newPrice
+
+    //         // append the new call history block to the parent
+    //         sidebarContentDiv.parentNode.append(newSidebarContentDiv)
+
+    //     });
+    // });
+
+
+
+
 }
-
-
-
 
 
 // *****---- Below are card showing function ****------
@@ -126,6 +174,12 @@ const loadAllPlant = () => {
             displayByCatTree(allPlant.plants);
         })
 };
+
+
+
+
+// *****---- Below are Add to cart button funcitons ****------
+
 
 // calling the loadTreeCategories() to show left side menu
 loadTreeCategories()
