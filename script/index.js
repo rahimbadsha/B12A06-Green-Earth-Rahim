@@ -90,43 +90,43 @@ const displayByCatTree = (plants) => {
 
     });
 
-    // IF Add to cart button clicks this code will execute
-    // const addCartBtns = document.querySelectorAll('.btn-add-cart');
-    // addCartBtns.forEach(button => {
-    //     button.addEventListener('click', function() {
-    //         const card = button.closest('.single-card');
-    //         const plantName = card.querySelector('.plant-name').innerText;
-    //         const plantPrice = card.querySelector('.plant-price');
-    //         const newPrice = parseInt(plantPrice.innerText)
+    IF Add to cart button clicks this code will execute
+    const addCartBtns = document.querySelectorAll('.btn-add-cart');
+    addCartBtns.forEach(button => {
+        button.addEventListener('click', function() {
+            const card = button.closest('.single-card');
+            const plantName = card.querySelector('.plant-name').innerText;
+            const plantPrice = card.querySelector('.plant-price');
+            const newPrice = parseInt(plantPrice.innerText)
 
-    //         alert(`Added ${plantName} (${plantPrice.innerText}) to the cart`);
+            alert(`Added ${plantName} (${plantPrice.innerText}) to the cart`);
 
             
 
-    //         const sidebarContentDiv = document.getElementById('sidebar-cart-div');
-    //         const sidebarTreeName = document.getElementById('added-tree-name');
-    //         const sidebarTreePrice = document.getElementById('added-tree-price');
-    //         let totalPrice = document.getElementById('total-price');
-    //         const sidebarDelete = document.getElementById('delete-icon');
+            const sidebarContentDiv = document.getElementById('sidebar-cart-div');
+            const sidebarTreeName = document.getElementById('added-tree-name');
+            const sidebarTreePrice = document.getElementById('added-tree-price');
+            let totalPrice = document.getElementById('total-price');
+            const sidebarDelete = document.getElementById('delete-icon');
             
-    //         // Clone the sidebar-cart-div
-    //         const sidebarContainer = document.getElementById('sidebar-container');
-    //         let newSidebarContentDiv = sidebarContentDiv.cloneNode(true);
-    //         sidebarContainer.classList.remove('hidden');
+            // Clone the sidebar-cart-div
+            const sidebarContainer = document.getElementById('sidebar-container');
+            let newSidebarContentDiv = sidebarContentDiv.cloneNode(true);
+            sidebarContainer.classList.remove('hidden');
 
-    //         // update the clone block with new data
-    //         sidebarTreeName.innerText = plantName;
-    //         sidebarTreePrice.innerText = plantPrice.innerText;
-    //         totalPrice.innerText = newPrice
+            // update the clone block with new data
+            sidebarTreeName.innerText = plantName;
+            sidebarTreePrice.innerText = plantPrice.innerText;
+            totalPrice.innerText = newPrice
 
-    //         //total price
-    //         //newPrice = newPrice + newPrice
+            //total price
+            //newPrice = newPrice + newPrice
 
-    //         // append the new call history block to the parent
-    //         sidebarContentDiv.parentNode.append(newSidebarContentDiv)
+            // append the new call history block to the parent
+            sidebarContentDiv.parentNode.append(newSidebarContentDiv)
 
-    //     });
-    // });
+        });
+    });
 
 
 
