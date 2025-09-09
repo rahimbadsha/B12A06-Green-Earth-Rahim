@@ -151,15 +151,11 @@ const displayByCatTree = (plants) => {
             };
         });
         
-
     });
 
     });
 
     
-
-
-
 
 //spinner function
 manageSpinner(false)
