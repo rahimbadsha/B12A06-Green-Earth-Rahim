@@ -13,9 +13,9 @@
 
 #### forEach(): It's loop through array. Do something for each item. 
 
-### map(): loop through array. return new array with changed values. 
+#### map(): loop through array. return new array with changed values. 
 
-### filter(): loop through array. return new array but only items that condition is match. 
+#### filter(): loop through array. return new array but only items that condition is match. 
 
 ---
 

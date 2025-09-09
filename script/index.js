@@ -78,7 +78,7 @@ const displayByCatTree = (plants) => {
                         
                         <div class="flex justify-between items-center gap-4 pt-3">
                             <h3 class="bg-[#dcfce8] py-1 px-2 rounded-full text-[#17803d]">${plant.category}</h3>
-                            <h2>৳<span class="plant-price"> ${plant.price}</span></h2>
+                            <h2>৳<span class="plant-price">${plant.price}</span></h2>
                         </div>
 
                         <button class="btn-add-cart btn btn-full w-full rounded-full bg-[#17803d] text-white p-3 mt-4">Add to card</button>
