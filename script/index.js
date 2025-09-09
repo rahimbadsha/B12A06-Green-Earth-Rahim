@@ -107,9 +107,7 @@ const displayByCatTree = (plants) => {
         const sidebarTemplateDiv = document.getElementById('sidebar-cart-div'); 
         const hr = sidebarContainer.querySelector('hr');
         const totalPrice = document.getElementById('total-price');
-        const deleteItem = document.getElementById('delete-icon')
-
-
+        
         // make sidebar visible
         sidebarContainer.classList.remove('hidden');
 
@@ -133,10 +131,38 @@ const displayByCatTree = (plants) => {
             sidebarTemplateDiv.classList.add('hidden');
         }
 
-        //alert(`Added ${plantName} ($${plantPrice}) to the cart`);
+        alert(`Added ${plantName} to the cart`);
+
+        // delete cart item
+        const cartDel = document.querySelectorAll('.delete');
+        cartDel.forEach(deleteBtn => {
+            deleteBtn.onclick = function() {
+                const getContainer = deleteBtn.closest('.sidebar-cart-container');
+                const getContainerItem = deleteBtn.closest('.sidebar-cart-item');
+                console.log(getContainerItem.children[0].children[0].children[1].children[0].innerText)
+                // delete the item
+                getContainerItem.remove();
+                const totalPrice = document.getElementById('total-price');
+                // Update total
+                const currentTotal = parseInt(totalPrice.innerText);
+                totalPrice.innerText = currentTotal -       parseInt(getContainerItem.children[0].children[0].children[1].children[0].innerText);
+                //getContainerItem.classList.add('hidden')
+
+                // updating the price
+                // Update total
+        
+            };
+        });
+        
+
     });
 
     });
+
+    
+
+
+
 
 //spinner function
 manageSpinner(false)
