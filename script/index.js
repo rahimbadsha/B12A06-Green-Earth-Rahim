@@ -142,14 +142,11 @@ const displayByCatTree = (plants) => {
                 console.log(getContainerItem.children[0].children[0].children[1].children[0].innerText)
                 // delete the item
                 getContainerItem.remove();
-                const totalPrice = document.getElementById('total-price');
+
                 // Update total
+                const totalPrice = document.getElementById('total-price');
                 const currentTotal = parseInt(totalPrice.innerText);
                 totalPrice.innerText = currentTotal -       parseInt(getContainerItem.children[0].children[0].children[1].children[0].innerText);
-                //getContainerItem.classList.add('hidden')
-
-                // updating the price
-                // Update total
         
             };
         });
