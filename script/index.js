@@ -39,7 +39,9 @@ const displayTreeCategories = (categoryName) => {
 
 // Function load categories plants on click categories on right side
 const loadByCategories = async(id) => {
-    let url = `https://openapi.programming-hero.com/api/category/${id}`
+    manageSpinner(true);
+
+    let url = `https://openapi.programming-hero.com/api/category/${id}`;
 
     const res = await fetch(url)
     const catGroup = await res.json()
@@ -90,47 +92,54 @@ const displayByCatTree = (plants) => {
 
     });
 
-    IF Add to cart button clicks this code will execute
+    //If Add to cart button clicks this code will execute
     const addCartBtns = document.querySelectorAll('.btn-add-cart');
     addCartBtns.forEach(button => {
-        button.addEventListener('click', function() {
-            const card = button.closest('.single-card');
-            const plantName = card.querySelector('.plant-name').innerText;
-            const plantPrice = card.querySelector('.plant-price');
-            const newPrice = parseInt(plantPrice.innerText)
+    button.addEventListener('click', function () {
+        // Find the card data
+        const card = button.closest('.single-card');
+        const plantName = card.querySelector('.plant-name').innerText;
+        const plantPriceText = card.querySelector('.plant-price').innerText;
+        const plantPrice = parseInt(plantPriceText);
 
-            alert(`Added ${plantName} (${plantPrice.innerText}) to the cart`);
+        // Sidebar elements
+        const sidebarContainer = document.getElementById('sidebar-container');
+        const sidebarTemplateDiv = document.getElementById('sidebar-cart-div'); 
+        const hr = sidebarContainer.querySelector('hr');
+        const totalPrice = document.getElementById('total-price');
+        const deleteItem = document.getElementById('delete-icon')
 
-            
 
-            const sidebarContentDiv = document.getElementById('sidebar-cart-div');
-            const sidebarTreeName = document.getElementById('added-tree-name');
-            const sidebarTreePrice = document.getElementById('added-tree-price');
-            let totalPrice = document.getElementById('total-price');
-            const sidebarDelete = document.getElementById('delete-icon');
-            
-            // Clone the sidebar-cart-div
-            const sidebarContainer = document.getElementById('sidebar-container');
-            let newSidebarContentDiv = sidebarContentDiv.cloneNode(true);
-            sidebarContainer.classList.remove('hidden');
+        // make sidebar visible
+        sidebarContainer.classList.remove('hidden');
 
-            // update the clone block with new data
-            sidebarTreeName.innerText = plantName;
-            sidebarTreePrice.innerText = plantPrice.innerText;
-            totalPrice.innerText = newPrice
+        // Clone the sidebarTemplateDiv
+        const plantItemDiv = sidebarTemplateDiv.cloneNode(true);
+        plantItemDiv.classList.remove('hidden');   
 
-            //total price
-            //newPrice = newPrice + newPrice
+        //  Update the clone content
+        plantItemDiv.querySelector('#added-tree-name').innerText = plantName;
+        plantItemDiv.querySelector('#added-tree-price').innerText = plantPrice;
 
-            // append the new call history block to the parent
-            sidebarContentDiv.parentNode.append(newSidebarContentDiv)
+        //  Insert above the <hr> 
+        sidebarContainer.insertBefore(plantItemDiv, hr);
 
-        });
+        // Update total
+        const currentTotal = parseInt(totalPrice.innerText);
+        totalPrice.innerText = currentTotal + plantPrice;
+
+        // hiding the existing div
+        if (!sidebarTemplateDiv.classList.contains('hidden')) {
+            sidebarTemplateDiv.classList.add('hidden');
+        }
+
+        //alert(`Added ${plantName} ($${plantPrice}) to the cart`);
     });
 
+    });
 
-
-
+//spinner function
+manageSpinner(false)
 }
 
 
@@ -166,6 +175,7 @@ const displayPlantDetails = (plant) => {
 
 // *****---- Below are all plant showing function ****------
 const loadAllPlant = () => {
+    manageSpinner(true)
     const url = `https://openapi.programming-hero.com/api/plants`;
 
     fetch(url)
@@ -178,7 +188,16 @@ const loadAllPlant = () => {
 
 
 
-// *****---- Below are Add to cart button funcitons ****------
+// *****---- Below are manage Spinner ****------
+const manageSpinner = (status) => {
+    if(status == true) {
+        document.getElementById('spinner-id').classList.remove('hidden')
+        document.getElementById('display-catdetails-container').classList.add('hidden')
+    } else {
+        document.getElementById('display-catdetails-container').classList.remove('hidden')
+        document.getElementById('spinner-id').classList.add('hidden')
+    }
+}
 
 
 // calling the loadTreeCategories() to show left side menu
